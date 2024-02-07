@@ -1,8 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import logo from "../images/logo.png";
-import { useNavigate } from "react-router-dom";
-import "../Profile.css";
+import logo2 from "../images/logo2.png";
+import "../Styles.css";
 
 const NavBar = ({ toggle }) => {
   return (
@@ -23,7 +22,7 @@ const NavBar = ({ toggle }) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <img
-              src={logo}
+              src={logo2}
               width={100}
               height={50}
               className="navbar-brand"
@@ -32,7 +31,7 @@ const NavBar = ({ toggle }) => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page">
-                  UI-Bank Loan
+                  Loan Processing Application
                 </a>
               </li>
             </ul>

@@ -11,7 +11,9 @@ export default function Register() {
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    const existingUsers = JSON.parse(localStorage.getItem("registrationData"));
+    const existingUsers = JSON.parse(
+      sessionStorage.getItem("registrationData")
+    );
     const currentUser = existingUsers?.find(
       (user) => user?.username === data?.username
     );
@@ -29,7 +31,7 @@ export default function Register() {
     } else {
       updatedUsers = (existingUsers || []).concat(data);
     }
-    localStorage.setItem("registrationData", JSON.stringify(updatedUsers));
+    sessionStorage.setItem("registrationData", JSON.stringify(updatedUsers));
     reset();
     alert("Registration succesful, redirecting to home page to login");
     navigate("/");

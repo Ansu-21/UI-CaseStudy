@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import LandingPage from "./LandingPage";
 
-describe("Dashboard", () => {
-  test("Expect Dashboard to render", () => {
+describe("LandingPage", () => {
+  test("Expect LandingPage to render", () => {
     render(
       <BrowserRouter>
-        <Dashboard />
+        <LandingPage />
       </BrowserRouter>
     );
     expect(screen.getByTestId("container-dashboard")).toBeInTheDocument();

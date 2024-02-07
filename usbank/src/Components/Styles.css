@@ -3,7 +3,9 @@
   flex-direction: column;
   height: 80vh;
 }
-
+.container-fluid {
+  background: #3498db;
+}
 .form {
   width: 400px;
 }
@@ -125,7 +127,7 @@ input {
   padding-right: 50px;
 }
 .button {
-  margin-top: 10px;
+  margin-top: 15px;
   margin-right: 20px;
   position: absolute;
   top: 0;
@@ -136,6 +138,7 @@ input {
 }
 .fixed {
   position: fixed;
+  background-color: #3498db;
 }
 .input-button {
   text-decoration: none;
@@ -188,5 +191,9 @@ input {
   }
   .shadow1 {
     border: none;
+  }
+  .button {
+    margin-top: 10px;
+    margin-right: 15px;
   }
 }

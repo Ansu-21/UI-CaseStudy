@@ -11,7 +11,9 @@ export default function Login() {
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    const existingUsers = JSON.parse(localStorage.getItem("registrationData"));
+    const existingUsers = JSON.parse(
+      sessionStorage.getItem("registrationData")
+    );
     const authenticatedUser = existingUsers?.find(
       (user) =>
         user?.username === data?.username && user?.password === data?.password
@@ -21,9 +23,9 @@ export default function Login() {
         userName: data.username,
         validUser: true,
       };
-      localStorage.setItem("loggedin-user", JSON.stringify(userInfo));
+      sessionStorage.setItem("loggedin-user", JSON.stringify(userInfo));
       reset();
-      navigate("/dashboard");
+      navigate("/landingpage");
     } else {
       alert("Invalid Credentials");
       reset();

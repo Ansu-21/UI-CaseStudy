@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 
 import { BrowserRouter } from "react-router-dom";
-import DashboardGrid from "./DashboardGrid";
+import LandingPageGrid from "./LandingPageGrid";
 
-describe("Dashboardgrid", () => {
-  test("Expect DashboardGrid to render", () => {
+describe("LandingPageGrid", () => {
+  test("Expect LandingPageGrid to render", () => {
     render(
       <BrowserRouter>
-        <DashboardGrid />
+        <LandingPageGrid />
       </BrowserRouter>
     );
     expect(screen.getByTestId("grid")).toBeInTheDocument();

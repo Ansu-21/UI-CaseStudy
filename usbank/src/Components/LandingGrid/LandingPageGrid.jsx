@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   useTable,
   useSortBy,
@@ -7,9 +6,10 @@ import {
   usePagination,
 } from "react-table";
 import { useNavigate } from "react-router-dom";
-import "../Profile.css";
+import "../Styles.css";
+import axios from "axios";
 
-const DashboardGrid = () => {
+const LandingPageGrid = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [ids, setIds] = useState([]);
@@ -50,10 +50,10 @@ const DashboardGrid = () => {
       // If the ID is already in the array, remove it
       setIds((prevIds) => prevIds.filter((id) => id !== clickedId));
     }
-    navigate("/myprofile");
+    navigate(`/account/${clickedId}`);
   };
 
-  const GridTable = () => {
+  const Grid = () => {
     const {
       getTableProps,
       getTableBodyProps,
@@ -138,7 +138,7 @@ const DashboardGrid = () => {
           <span>
             Page{" "}
             <strong>
-              {pageIndex + 1} of {page.length}
+              {pageIndex + 1} of {Math.ceil(data.length / 6)}
             </strong>{" "}
           </span>
         </div>
@@ -148,9 +148,9 @@ const DashboardGrid = () => {
 
   return (
     <div className="App" data-testid="grid">
-      <GridTable />
+      <Grid />
     </div>
   );
 };
 
-export default DashboardGrid;
+export default LandingPageGrid;

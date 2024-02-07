@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardGrid from "../DashboardGrid/DashboardGrid";
+import LandingPageGrid from "../LandingGrid/LandingPageGrid";
 import MyProfile from "../MyProfile/MyProfile";
 import AccountInfo from "../AccountInfo/AccountInfo";
 import { UserContext } from "../Context/Context";
 
-const Dashboard = ({ toggle }) => {
+const LandingPage = ({ toggle }) => {
   const [isDashboard, setIsDashboard] = useState(true);
   const [isMyProfile, setIsMyProfile] = useState();
   const [isAccountInfo, setIsAccountInfo] = useState();
   const navigate = useNavigate();
-  const loggedInUserInfo = JSON.parse(localStorage.getItem("loggedin-user"));
-  const { user, setUser } = useContext(UserContext);
+  const loggedInUserInfo = JSON.parse(sessionStorage.getItem("loggedin-user"));
+  const { user } = useContext(UserContext);
   const firstName = user?.firstname.toString();
   const lastName = user?.lastname.toString();
   useEffect(() => {
@@ -21,7 +21,7 @@ const Dashboard = ({ toggle }) => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("loggedin-user");
+    sessionStorage.removeItem("loggedin-user");
     navigate("/");
   };
 
@@ -34,7 +34,11 @@ const Dashboard = ({ toggle }) => {
           }`}
         >
           <ul className={`listed navLeft shadow1 `}>
-            <li className="list text-side-nav active mb20">
+            <li
+              className={`list text-side-nav ${
+                isDashboard ? "active" : ""
+              } mb20`}
+            >
               <div
                 onClick={() => {
                   setIsDashboard(true);
@@ -45,7 +49,11 @@ const Dashboard = ({ toggle }) => {
                 Loan Dashboard
               </div>
             </li>
-            <li className="list text-side-nav mb20">
+            <li
+              className={`list text-side-nav ${
+                isMyProfile ? "active" : ""
+              } mb20`}
+            >
               <div
                 onClick={() => {
                   setIsMyProfile(true);
@@ -56,7 +64,11 @@ const Dashboard = ({ toggle }) => {
                 My Profile
               </div>
             </li>
-            <li className="list text-side-nav mb20">
+            <li
+              className={`list text-side-nav ${
+                isAccountInfo ? "active" : ""
+              } mb20`}
+            >
               <div
                 onClick={() => {
                   setIsAccountInfo(true);
@@ -77,18 +89,18 @@ const Dashboard = ({ toggle }) => {
             </h3>
             <button
               type="button"
-              class="btn btn-primary button"
+              class="btn btn-secondary button"
               onClick={handleLogout}
             >
               Logout
             </button>
           </div>
           {isAccountInfo && <AccountInfo />}
-          {isDashboard && <DashboardGrid />}
+          {isDashboard && <LandingPageGrid />}
           {isMyProfile && <MyProfile />}
         </div>
       </div>
     </div>
   );
 };
-export default Dashboard;
+export default LandingPage;

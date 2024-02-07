@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import MyPRofile from "./Components/MyProfile/MyProfile";
 import Account from "./Components/AccountInfo/AccountInfo";
-import Dashboard from "./Components/Dashboard/Dashboard";
+import LandingPage from "./Components/Landing/LandingPage";
 import NavBar from "./Components/Navbar/NavBar";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
@@ -24,11 +24,11 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route
-                path="/dashboard"
-                element={<Dashboard toggle={{ toggle }} />}
+                path="/Landingpage"
+                element={<LandingPage toggle={{ toggle }} />}
               ></Route>
-              <Route path="/account" element={<Account />}></Route>
-              <Route path="/myprofile" element={<MyPRofile />}></Route>
+              <Route path="/account/:id" element={<Account />}></Route>
+              {/* <Route path="/myprofile" element={<MyPRofile />}></Route> */}
             </Routes>
           </ContextProvider>
         </BrowserRouter>

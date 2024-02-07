@@ -1,16 +1,35 @@
-import React, { useContext } from "react";
-import "../Profile.css";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import "../Styles.css";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../Context/Context";
+import { useState } from "react";
+import axios from "axios";
 
 const AccountInfo = () => {
+  const [data, setData] = useState();
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/loaninfo")
+      .then((response) => {
+        console.log(response, "response");
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+  let { id } = useParams();
+  console.log(data, "data");
+  const filteredData = data && data?.filter((item) => String(item.id) === id);
+  console.log(filteredData, "fdata");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     event.target.reset();
-    navigate("/dashboard");
+    navigate("/landingpage");
   };
 
   return (
@@ -18,28 +37,43 @@ const AccountInfo = () => {
       <div className="container-box" data-testid="container-box">
         <h2 className="heading-text">Account Information</h2>
         <div className="form container">
-          <form onSubmit={handleSubmit}>
+          <form>
             <div>
-              <label htmlFor="accountingFirm" className="text-grey mb7">
-                Accounting Firm:
+              <label htmlFor="loanId" className="text-grey mb7">
+                LoanId:
               </label>
               <input
-                type="text"
-                id="accountingFirm"
+                type="number"
+                id="loanId"
                 className="input-feild"
-                name="accountingFirm"
+                name="loanId"
+                value={filteredData?.id || ""}
                 required
               />
             </div>
             <div>
-              <label htmlFor="accountantsName" className="text-grey mb7">
-                Accountant's Name:
+              <label htmlFor="purposeOfLoan" className="text-grey mb7">
+                Purpose of Loan:
               </label>
               <input
                 type="text"
-                id="accountantsName"
+                id="purposeOfLoan"
                 className="input-feild"
-                name="accountantsName"
+                name="purposeOfLoan"
+                value={filteredData?.purpose || ""}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="status" className="text-grey mb7">
+                Status:
+              </label>
+              <input
+                type="text"
+                id="status"
+                className="input-feild"
+                name="status"
+                value={filteredData?.status || ""}
                 required
               />
             </div>
@@ -55,19 +89,6 @@ const AccountInfo = () => {
                 required
               />
             </div>
-            <div>
-              <label htmlFor="accountantsEmail" className="text-grey mb7">
-                Accountant's Email Address:
-              </label>
-              <input
-                type="email"
-                id="accountantsEmail"
-                className="input-feild"
-                name="accountantsEmail"
-                required
-                value={user?.email}
-              />
-            </div>
             <div className="buttonSets">
               <button className="btn-next btn-common" type="submit">
                 Submit
@@ -76,7 +97,7 @@ const AccountInfo = () => {
                 className="btn-cancel btn-common"
                 type="button"
                 onClick={() => {
-                  navigate("/dashboard");
+                  navigate("/landingpage");
                 }}
               >
                 Cancel

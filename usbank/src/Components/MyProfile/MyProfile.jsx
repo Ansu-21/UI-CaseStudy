@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../Profile.css";
+import "../Styles.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "../Context/Context";
@@ -75,7 +75,7 @@ const MyProfile = () => {
             <button
               className="btn-cancel btn-common"
               type="button"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/landingpage")}
             >
               Cancel
             </button>
